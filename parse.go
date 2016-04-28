@@ -58,8 +58,8 @@ func numerical(s string) interface{} {
 	return s
 }
 
-// AddPoint will convert the values of m into an influxdb Point and queue it to send
-func AddPoint(m, tags map[string]string, t Translate, send Sender) (err error) {
+// addPoint will convert the values of m into an influxdb Point and queue it to send
+func addPoint(m, tags map[string]string, t Translate, send Sender) (err error) {
 	found, ok := m[t.Key]
 	if !ok {
 		found = t.Key
@@ -143,7 +143,7 @@ func Parse(
 				return err
 			}
 		}
-		return AddPoint(m, tags, t, s)
+		return addPoint(m, tags, t, s)
 	}
 
 	return g.ParseStream(reader, trans.Pattern, process)
